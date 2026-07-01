@@ -1,5 +1,5 @@
 import allure
-
+from data import ErrorMessages
 
 @allure.suite('Получение заказов пользователя')
 class TestGetUserOrders:
@@ -15,4 +15,4 @@ class TestGetUserOrders:
     def test_get_orders_without_auth(self, order_methods):
         body, status_code = order_methods.get_user_orders()
         assert (status_code == 401 and body.get("success")
-                is False and body.get("message") == "You should be authorised")
+                is False and body.get("message") == ErrorMessages.NOT_AUTHORISED)

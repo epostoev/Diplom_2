@@ -28,3 +28,6 @@ install_allure:
 	echo 'export JAVA_HOME=~/DISTR/jdk-17.0.19+10/Contents/Home' >> ~/.bash
 	echo 'export PATH=$PATH:$JAVA_HOME/bin:~/DISTR/allure-2.40.0/bin' >> ~/.bash
 	source ~/.bash
+
+clean:
+	rm -rf allure_result allure-report

@@ -1,5 +1,6 @@
 import pytest
 import allure
+from data import ErrorMessages
 
 
 @allure.suite('Логин пользвателя')
@@ -27,7 +28,6 @@ class TestLoginUsers:
             get_password):
         email = registered_user["email"] if get_email else "wrongemail"
         password = registered_user["password"] if get_password else "wrongpassword"
-        # print(f"\n{email} and {password}")
         body, status_code = users_methods.login(email, password)
         assert (
-            status_code == 401 and body["message"] == "email or password are incorrect")
+            status_code == 401 and body["message"] == ErrorMessages.WRONG_EMAIL_OR_PASSWORD)

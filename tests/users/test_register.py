@@ -2,6 +2,7 @@ import pytest
 import json
 import allure
 from helpers import generate_user_data
+from data import ErrorMessages
 
 
 @allure.suite('Создание Уникальног пользвателя')
@@ -25,7 +26,7 @@ class TestCtreateUsers:
         print("\n")
         print(json.dumps(body))
         assert (
-            status_code == 403 and body["message"] == "User already exists")
+            status_code == 403 and body["message"] == ErrorMessages.USER_ALREADY_EXISTS)
 
     @allure.title('Создание пользователя без обязательного поля')
     @pytest.mark.parametrize("missing_field", ["name", "password", "email"])
@@ -40,4 +41,4 @@ class TestCtreateUsers:
                 user_data.get("email"),
             )
         assert (status_code == 403 and body["message"] ==
-                "Email, password and name are required fields")
+                ErrorMessages.MISSING_REQUIRED_FIELDS)

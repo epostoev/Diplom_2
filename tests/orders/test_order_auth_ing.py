@@ -1,4 +1,5 @@
 import allure
+from data import ErrorMessages
 
 
 @allure.suite('Создание заказа')
@@ -25,14 +26,14 @@ class TestCreateOrder:
         token = registered_user["token"]
         body, status_code = order_methods.create_order([], token=token)
         assert (status_code == 400 and body.get("success") is False and body.get(
-            "message") == "Ingredient ids must be provided")
+            "message") == ErrorMessages.INGREDIENT_IDS_REQUIRED)
 
     @allure.title('Создание заказа без авторизации и без ингредиентов')
     def test_order_create_without_auth_and_without_ingredients(
             self, order_methods):
         body, status_code = order_methods.create_order([])
         assert (status_code == 400 and body.get("success") is False and body.get(
-            "message") == "Ingredient ids must be provided")
+            "message") == ErrorMessages.INGREDIENT_IDS_REQUIRED)
 
     @allure.title('Создание заказа с неверным хешем ингредиентов')
     def test_order_create_with_invalid_ingredient_hash(
